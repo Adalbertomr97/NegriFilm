@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NegriFilm</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #121212; color: #fff; margin: 0; }
+    header { background: #1f1f1f; padding: 1rem; text-align: center; font-size: 2rem; font-weight: bold; }
+    .catalogo { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 1rem; padding: 1rem; }
+    .pelicula { background: #2a2a2a; border-radius: 10px; padding: 0.5rem; text-align: center; }
+    .pelicula img { width: 100%; border-radius: 10px; }
+    .pelicula button { margin-top: 0.5rem; padding: 0.5rem 1rem; background: #25d366; border: none; color: white; border-radius: 5px; cursor: pointer; }
+    .admin-panel { display: none; padding: 1rem; }
+    footer { text-align: center; padding: 1rem; background: #1f1f1f; }
+  </style>
+</head>
+<body>
+  <header>NegriFilm</header>
+  <section class="catalogo" id="catalogo">
+  </section>
+
+  <div class="admin-panel" id="adminPanel">
+    <h2>Panel de Administración</h2>
+    <input type="text" id="titulo" placeholder="Título de la película"><br><br>
+    <input type="text" id="imagen" placeholder="URL de la carátula"><br><br>
+    <input type="text" id="descripcion" placeholder="Descripción"><br><br>
+    <button onclick="agregarPelicula()">Agregar Película</button>
+  </div>
+
+  <footer>
+    © 2025 NegriFilm
+  </footer>
+
+  <script>
+    let clave = prompt("Introduce la clave para el panel de administración:");
+    if (clave === "Negri2025/*") {
+      document.getElementById("adminPanel").style.display = "block";
+    }
+
+    const catalogo = document.getElementById("catalogo");
+
+    function agregarPelicula() {
+      const titulo = document.getElementById("titulo").value;
+      const imagen = document.getElementById("imagen").value;
+      const descripcion = document.getElementById("descripcion").value;
+
+      const peliculaDiv = document.createElement("div");
+      peliculaDiv.className = "pelicula";
+      peliculaDiv.innerHTML = `
+        <img src="${imagen}" alt="${titulo}">
+        <h3>${titulo}</h3>
+        <p>${descripcion}</p>
+        <a href="https://wa.me/5359887658?text=Hola%20Negri,%20quiero%20comprar:%20${encodeURIComponent(titulo)}" target="_blank">
+          <button>Solicitar por WhatsApp</button>
+        </a>
+      `;
+      catalogo.appendChild(peliculaDiv);
+
+      document.getElementById("titulo").value = "";
+      document.getElementById("imagen").value = "";
+      document.getElementById("descripcion").value = "";
+    }
+  </script>
+</body>
+</html>
